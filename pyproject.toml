@@ -1,0 +1,10 @@
+[project]
+name = "hospital"
+version = "0.1.0"
+description = "Example library for hospital and geometry classes"
+authors = [{ name = "Olsa Berani" }]
+requires-python = ">=3.10"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
