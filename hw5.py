@@ -235,3 +235,62 @@ c = Circle(3)
 print("Perimeter:", c.compute_perimeter())  
 print("Surface:", c.compute_surface())      
 
+###########################################
+#Question 6: Data Analysis
+
+#a) test 
+from src.data_loader import DataLoader
+
+loader = DataLoader("data/sample_diabetes_mellitus_data.csv")
+train_df, test_df = loader.split_data()
+
+print("Train shape:", train_df.shape)
+print("Test shape:", test_df.shape)
+
+#b) test 
+from src.data_loader import DataLoader
+from src.preprocessor_dropna import DropNaPreprocessor
+
+loader = DataLoader("data/sample_diabetes_mellitus_data.csv")
+train_df, test_df = loader.split_data()
+
+dropper = DropNaPreprocessor()
+train_clean = dropper.process(train_df)
+test_clean = dropper.process(test_df)
+
+print("Original train shape:", train_df.shape)
+print("Cleaned train shape:", train_clean.shape)
+
+
+#c) test
+from src.preprocessor_fillmean import FillMeanPreprocessor
+
+filler = FillMeanPreprocessor()
+train_final = filler.process(train_clean)
+test_final = filler.process(test_clean)
+
+print("before filling:", train_clean.isna().sum()[["height", "weight"]])
+print("after filling:", train_final.isna().sum()[["height", "weight"]])
+
+#d) test 
+from src.features import BMIFeature, AgeGroupFeature
+
+bmi_feature = BMIFeature()
+age_feature = AgeGroupFeature()
+
+train_features = bmi_feature.transform(train_final)
+train_features = age_feature.transform(train_features)
+
+print(train_features[["height", "weight", "BMI", "age", "age_group"]].head())
+
+#e) and f) model class test
+from src.model import Model
+
+feature_cols = ["BMI", "age"]
+target_col = "diabetes"
+
+model = Model(feature_cols=feature_cols, target_col=target_col, max_iter=1000)
+model.train(train_features)
+
+test_final["predictions"] = model.predict(test_final)
+print(test_final[["BMI", "age", "predictions"]].head())
