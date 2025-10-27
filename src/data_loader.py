@@ -6,10 +6,14 @@ class DataLoader:
         self.file_path = file_path
 
     def load_data(self):
+        """Load dataset and return as pandas DataFrame."""
         data = pd.read_csv(self.file_path)
         return data
 
     def split_data(self, test_size=0.2, random_state=42):
+        """Split the data into train and test DataFrames."""
         data = self.load_data()
         train_df, test_df = train_test_split(data, test_size=test_size, random_state=random_state)
         return train_df, test_df
+
+

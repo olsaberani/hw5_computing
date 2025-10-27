@@ -10,3 +10,4 @@ class DropNaPreprocessor:
         """Remove rows with NaN values in specific columns."""
         cleaned_df = df.dropna(subset=self.columns_to_check)
         return cleaned_df
+
