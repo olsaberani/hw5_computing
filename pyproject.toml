@@ -4,6 +4,11 @@ version = "0.1.0"
 description = "Example library for hospital and geometry classes"
 authors = [{ name = "Olsa Berani" }]
 requires-python = ">=3.10"
+dependencies = [
+    "geopy>=2.4.1",
+    "pandas>=2.3.3",
+    "scikit-learn>=1.7.2",
+]
 
 [build-system]
 requires = ["setuptools"]

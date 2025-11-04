@@ -283,14 +283,18 @@ train_features = age_feature.transform(train_features)
 
 print(train_features[["height", "weight", "BMI", "age", "age_group"]].head())
 
-#e) and f) model class test
+# e) and f) model class test
 from src.model import Model
 
 feature_cols = ["BMI", "age"]
-target_col = "diabetes"
+target_col = "diabetes_mellitus"
 
 model = Model(feature_cols=feature_cols, target_col=target_col, max_iter=1000)
 model.train(train_features)
 
+test_final = bmi_feature.transform(test_final)
+test_final = age_feature.transform(test_final)
+
 test_final["predictions"] = model.predict(test_final)
 print(test_final[["BMI", "age", "predictions"]].head())
+
