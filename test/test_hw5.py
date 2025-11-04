@@ -1,3 +1,6 @@
+import sys, os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 import unittest
 import pandas as pd
 from src.preprocessor_dropna import DropNaPreprocessor

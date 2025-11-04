@@ -6,4 +6,6 @@ Author: Olsa Berani
 Requires-Python: >=3.10
 Requires-Dist: geopy>=2.4.1
 Requires-Dist: pandas>=2.3.3
+Requires-Dist: pytest>=8.4.2
+Requires-Dist: pytest-cov>=7.0.0
 Requires-Dist: scikit-learn>=1.7.2
